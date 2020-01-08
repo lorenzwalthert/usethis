@@ -124,8 +124,11 @@ use_tidy_ci <- function(browse = interactive()) {
 #' @rdname tidyverse
 use_tidy_description <- function() {
   desc <- desc::description$new(file = proj_get())
+  desc_old <- desc$clone(deep = TRUE)
   tidy_desc(desc)
-  desc$write()
+  if (!identical(desc_old, desc)) {
+    desc$write()
+  }
   invisible(TRUE)
 }
 
